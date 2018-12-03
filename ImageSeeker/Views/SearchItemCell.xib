@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchItemCell" id="gTV-IL-0wX" customClass="SearchItemCell" customModule="ImageSeeker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="255" height="146"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="255" height="146"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-M9-EB1">
+                        <rect key="frame" x="4" y="4" width="247" height="138"/>
+                        <gestureRecognizers/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="placeholder"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                </subviews>
+            </view>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="t5c-M9-EB1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="6rF-UO-fOy"/>
+                <constraint firstAttribute="bottom" secondItem="t5c-M9-EB1" secondAttribute="bottom" constant="4" id="Kxj-qD-dJq"/>
+                <constraint firstAttribute="trailing" secondItem="t5c-M9-EB1" secondAttribute="trailing" constant="4" id="MV6-eR-xRe"/>
+                <constraint firstItem="t5c-M9-EB1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="MYc-Vz-EHg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="255" height="146"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="placeholder"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="imageView" destination="t5c-M9-EB1" id="MQc-K9-Sq8"/>
+            </connections>
+            <point key="canvasLocation" x="296.80000000000001" y="180.80959520239881"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="placeholder" width="300" height="250"/>
+    </resources>
+</document>
