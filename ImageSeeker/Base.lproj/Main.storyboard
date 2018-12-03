@@ -99,6 +99,7 @@
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="PXK-zB-jfT"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="jis-V3-iZ1"/>
                                             <outlet property="prefetchDataSource" destination="BYZ-38-t0r" id="Ck3-ut-yFr"/>
+                                            <outletCollection property="gestureRecognizers" destination="whU-IX-Pou" appends="YES" id="6VO-S0-bZA"/>
                                         </connections>
                                     </collectionView>
                                 </subviews>
@@ -152,6 +153,11 @@
                 <tapGestureRecognizer id="bq3-3h-Xcf">
                     <connections>
                         <action selector="onNoContentStubViewTap:" destination="BYZ-38-t0r" id="Tt1-rm-WLk"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="whU-IX-Pou">
+                    <connections>
+                        <action selector="onCollectionViewDoubleTap:" destination="BYZ-38-t0r" id="MVX-RW-RMd"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

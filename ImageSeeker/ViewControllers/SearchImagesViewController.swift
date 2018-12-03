@@ -30,6 +30,8 @@ class SearchImagesViewController: UIViewController,
     
     private let viewModel = SearchViewModel()
     
+    private let previewViewController = ImagePreviewViewController()
+    
 }
 
 extension SearchImagesViewController {
@@ -70,6 +72,16 @@ extension SearchImagesViewController {
     @IBAction func onNoContentStubViewTap(_ sender: Any) {
         searchBar.resignFirstResponder()
     }
+    
+    
+    @IBAction func onCollectionViewDoubleTap(_ sender: UITapGestureRecognizer) {
+        let point = sender.location(in: collectionView)
+        let optionalIndexPath = collectionView.indexPathForItem(at: point)
+        guard let indexPath = optionalIndexPath else {
+            return
+        }
+        self.collectionView(collectionView, didDoubleTappedItemAt: indexPath)
+    }
 }
 
 extension SearchImagesViewController {
@@ -101,6 +113,12 @@ extension SearchImagesViewController {
         if indexPaths.contains(where: needToLoad) {
             viewModel.loadNextPage()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDoubleTappedItemAt: IndexPath) {
+        let indexPath = didDoubleTappedItemAt
+        previewViewController.display(index: indexPath.row, of: self.viewModel.imageItems.value)
+        navigationController?.pushViewController(previewViewController, animated: true)
     }
     
     func needToLoad(_ indexPath: IndexPath) -> Bool{

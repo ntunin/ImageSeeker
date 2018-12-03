@@ -18,6 +18,11 @@
 		231CA12B21B1234100CED81E /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 231CA12A21B1234100CED81E /* response.json */; };
 		231E7BE621B0EABC00C1EAB8 /* SearchItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E7BE421B0EABC00C1EAB8 /* SearchItemCell.swift */; };
 		231E7BE721B0EABC00C1EAB8 /* SearchItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 231E7BE521B0EABC00C1EAB8 /* SearchItemCell.xib */; };
+		2328C80821B561D800A74BA8 /* UICollectionView+registerCellWithNibName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C80621B561D800A74BA8 /* UICollectionView+registerCellWithNibName.swift */; };
+		2328C80B21B5625000A74BA8 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C80921B5625000A74BA8 /* ImagePreviewViewController.swift */; };
+		2328C80C21B5625000A74BA8 /* ImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2328C80A21B5625000A74BA8 /* ImagePreviewViewController.xib */; };
+		2328C80F21B5625800A74BA8 /* ImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C80D21B5625800A74BA8 /* ImagePreviewCell.swift */; };
+		2328C81021B5625800A74BA8 /* ImagePreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2328C80E21B5625800A74BA8 /* ImagePreviewCell.xib */; };
 		235712C721B4F08D0098D4C0 /* ImagePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */; };
 		235712CA21B4F7AB0098D4C0 /* ObjectAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712C921B4F7AB0098D4C0 /* ObjectAssociation.swift */; };
 		235712D221B4FE860098D4C0 /* UIImageView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712D121B4FE860098D4C0 /* UIImageView+Placeholder.swift */; };
@@ -66,6 +71,11 @@
 		231CA12A21B1234100CED81E /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		231E7BE421B0EABC00C1EAB8 /* SearchItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemCell.swift; sourceTree = "<group>"; };
 		231E7BE521B0EABC00C1EAB8 /* SearchItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchItemCell.xib; sourceTree = "<group>"; };
+		2328C80621B561D800A74BA8 /* UICollectionView+registerCellWithNibName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+registerCellWithNibName.swift"; sourceTree = "<group>"; };
+		2328C80921B5625000A74BA8 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
+		2328C80A21B5625000A74BA8 /* ImagePreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreviewViewController.xib; sourceTree = "<group>"; };
+		2328C80D21B5625800A74BA8 /* ImagePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewCell.swift; sourceTree = "<group>"; };
+		2328C80E21B5625800A74BA8 /* ImagePreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreviewCell.xib; sourceTree = "<group>"; };
 		235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewModel.swift; sourceTree = "<group>"; };
 		235712C921B4F7AB0098D4C0 /* ObjectAssociation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAssociation.swift; sourceTree = "<group>"; };
 		235712D121B4FE860098D4C0 /* UIImageView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Placeholder.swift"; sourceTree = "<group>"; };
@@ -144,6 +154,8 @@
 		231537DA21B04CBB00B6B627 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2328C80921B5625000A74BA8 /* ImagePreviewViewController.swift */,
+				2328C80A21B5625000A74BA8 /* ImagePreviewViewController.xib */,
 				231537DB21B04CE100B6B627 /* SearchImagesViewController.swift */,
 			);
 			path = ViewControllers;
@@ -169,6 +181,8 @@
 		231E7BE321B0EA6A00C1EAB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2328C80D21B5625800A74BA8 /* ImagePreviewCell.swift */,
+				2328C80E21B5625800A74BA8 /* ImagePreviewCell.xib */,
 				231E7BE421B0EABC00C1EAB8 /* SearchItemCell.swift */,
 				231E7BE521B0EABC00C1EAB8 /* SearchItemCell.xib */,
 			);
@@ -178,6 +192,7 @@
 		235712C821B4F6650098D4C0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2328C80621B561D800A74BA8 /* UICollectionView+registerCellWithNibName.swift */,
 				235712D121B4FE860098D4C0 /* UIImageView+Placeholder.swift */,
 			);
 			path = Extensions;
@@ -405,6 +420,8 @@
 				2367BFA921B01E7E005FCF77 /* Assets.xcassets in Resources */,
 				231CA12B21B1234100CED81E /* response.json in Resources */,
 				2367BFA421B01E7D005FCF77 /* Main.storyboard in Resources */,
+				2328C81021B5625800A74BA8 /* ImagePreviewCell.xib in Resources */,
+				2328C80C21B5625000A74BA8 /* ImagePreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,9 +559,12 @@
 				231537E421B06E7D00B6B627 /* ContentManager.swift in Sources */,
 				2367BF9F21B01E7D005FCF77 /* AppDelegate.swift in Sources */,
 				231537D921B0499F00B6B627 /* SearchImagesResponse.swift in Sources */,
+				2328C80B21B5625000A74BA8 /* ImagePreviewViewController.swift in Sources */,
 				231537E121B0523900B6B627 /* SearchViewModel.swift in Sources */,
+				2328C80F21B5625800A74BA8 /* ImagePreviewCell.swift in Sources */,
 				2367BFD621B01FFB005FCF77 /* Info.swift in Sources */,
 				235712C721B4F08D0098D4C0 /* ImagePreviewViewModel.swift in Sources */,
+				2328C80821B561D800A74BA8 /* UICollectionView+registerCellWithNibName.swift in Sources */,
 				2367BFA721B01E7D005FCF77 /* ImageSeeker.xcdatamodeld in Sources */,
 				2367BFD121B01ED1005FCF77 /* ImageSeekerAPI.swift in Sources */,
 				235712D221B4FE860098D4C0 /* UIImageView+Placeholder.swift in Sources */,
