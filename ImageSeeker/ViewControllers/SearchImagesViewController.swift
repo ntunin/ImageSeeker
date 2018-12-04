@@ -17,7 +17,7 @@ class SearchImagesViewController: UIViewController,
                                   UICollectionViewDelegate,
                                   UICollectionViewDataSource,
                                   UICollectionViewDataSourcePrefetching,
-                                  UICollectionViewDelegateFlowLayout  {
+                                  UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var noContentStubLabel: UILabel!
     @IBOutlet weak var noContentStubActivityIndicator: UIActivityIndicatorView!
@@ -61,6 +61,10 @@ extension SearchImagesViewController {
         viewModel.keywords.value = ""
         viewModel.isContentLoading.value = false
         viewModel.savingImageItems.value = []
+        
+        if #available(iOS 10.0, *) {
+            collectionView.prefetchDataSource = self
+        }
     }
     
     
@@ -173,5 +177,31 @@ extension SearchImagesViewController {
     
     func needToLoad(_ indexPath: IndexPath) -> Bool{
         return indexPath.row >= viewModel.imageItems.value.count
+    }
+}
+
+
+extension SearchImagesViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if #available(iOS 10.0, *) { // For iOS 10.0 an grater will be used defeult prefetch functionality
+            return
+        }
+        if viewModel.isContentLoading.value {
+            return
+        }
+        
+        if let lastVisibleCell = collectionView.visibleCells.last,
+            let indexPath = collectionView.indexPathForItem(at: lastVisibleCell.frame.origin) {
+            let firstPrefetchingIndex = collectionView.visibleCells.count
+            let lastPrefetchingIndex = min(indexPath.row + firstPrefetchingIndex, viewModel.totalCount.value)
+            if lastPrefetchingIndex > viewModel.imageItems.value.count {
+                var indexPaths: [IndexPath] = []
+                for i in firstPrefetchingIndex ... lastPrefetchingIndex {
+                    indexPaths.append(IndexPath(row: i, section: 0))
+                }
+                self.collectionView(collectionView, prefetchItemsAt: indexPaths)
+            }
+        }
+        
     }
 }

@@ -14,8 +14,8 @@ class ImageSeekerJSONAPI: ImageSeekerAPI {
     let response: SearchImagesResponse?
     
     init(_ jsonName: String) throws {
-        if let path = Bundle.main.path(forResource: jsonName, ofType: "json") {
-            let data = try Data(contentsOf: URL(string: "file://\(path)")!)
+        if let url = Bundle.main.url(forResource: jsonName, withExtension: "json") {
+            let data = try Data(contentsOf: url)
             let string = String(data: data, encoding: .utf8)!
             response = SearchImagesResponse(JSONString: string)
         } else {

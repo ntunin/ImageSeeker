@@ -14,6 +14,7 @@ import Result
 class ContentManager: NSObject {
     
     let api: ImageSeekerAPI?
+    var storageManager: StorageManager?
     var page = 1
     var pageSize = 50
     
@@ -22,6 +23,11 @@ class ContentManager: NSObject {
     override init() {
         do {
             api = try ImageSeekerJSONAPI("response")
+            if #available(iOS 10.0, *) {
+                storageManager = PersistentContainerStorageManager()
+            } else {
+                storageManager = PersistentStoreCoordinatorStorageManager()
+            }
         } catch {
             api = nil
             print("could not initialize api service")
@@ -40,7 +46,9 @@ class ContentManager: NSObject {
     }
     
     func save(_ items: [SearchImageItem]) {
-        StorageManager.shared.insert(into: K.Storage.Tables.SearchImageItems, values: items)
+        if let storageManager = storageManager {
+            storageManager.insert(into: K.Storage.Tables.SearchImageItems, values: items)            
+        }
     }
     
     func reset() {

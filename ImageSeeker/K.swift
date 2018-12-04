@@ -28,7 +28,7 @@ struct K {
     }
     
     struct Storage {
-        static let containerName = "ImageSeeker"
+        static let ModelName = "ImageSeeker"
         struct Tables {
             static let SearchImageItems = "SearchImageItems"
         }

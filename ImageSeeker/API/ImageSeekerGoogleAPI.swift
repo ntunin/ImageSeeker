@@ -22,7 +22,7 @@ class ImageSeekerGoogleAPI: ImageSeekerAPI {
     let engineId: String
     
     init() throws {
-        if let google = Info.plist?[K.google] as? NSDictionary,
+        if let google = Bundle.main.infoDictionary![K.google] as? NSDictionary,
             let base = google[K.Google.API] as? String,
             let version = google[K.Google.version] as? String,
             let apiKey = google[K.Google.APIKey] as? String,

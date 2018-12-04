@@ -50,12 +50,12 @@ class ImageSeekerTests: XCTestCase {
     
     func testStorageManager() {
         let entity = SearchImageItem(title: "", link: "", thumbnailLink: "")
-        StorageManager.shared.insert(into: K.Storage.Tables.SearchImageItems, value: entity)
-        guard let items = StorageManager.shared.select(allFromTable: K.Storage.Tables.SearchImageItems) as? [SearchImageItem] else {
+        PersistentContainerStorageManager.shared.insert(into: K.Storage.Tables.SearchImageItems, value: entity)
+        guard let items = PersistentContainerStorageManager.shared.select(allFromTable: K.Storage.Tables.SearchImageItems) as? [SearchImageItem] else {
             assert(false)
         }
         assert(items.count > 0)
-        StorageManager.shared.delete(from: K.Storage.Tables.SearchImageItems, value: entity)
+        PersistentContainerStorageManager.shared.delete(from: K.Storage.Tables.SearchImageItems, value: entity)
     }
     
     

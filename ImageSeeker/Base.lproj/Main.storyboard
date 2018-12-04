@@ -98,7 +98,6 @@
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="PXK-zB-jfT"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="jis-V3-iZ1"/>
-                                            <outlet property="prefetchDataSource" destination="BYZ-38-t0r" id="Ck3-ut-yFr"/>
                                             <outletCollection property="gestureRecognizers" destination="whU-IX-Pou" appends="YES" id="6VO-S0-bZA"/>
                                         </connections>
                                     </collectionView>
