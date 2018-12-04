@@ -26,14 +26,22 @@
                             <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="placeholder"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lda-Uj-RCY">
+                        <rect key="frame" x="0.0" y="0.0" width="255" height="146"/>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
             </view>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="t5c-M9-EB1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="6rF-UO-fOy"/>
+                <constraint firstItem="Lda-Uj-RCY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8B3-D3-lB3"/>
                 <constraint firstAttribute="bottom" secondItem="t5c-M9-EB1" secondAttribute="bottom" constant="4" id="Kxj-qD-dJq"/>
                 <constraint firstAttribute="trailing" secondItem="t5c-M9-EB1" secondAttribute="trailing" constant="4" id="MV6-eR-xRe"/>
                 <constraint firstItem="t5c-M9-EB1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="MYc-Vz-EHg"/>
+                <constraint firstItem="Lda-Uj-RCY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Yox-6f-7Bi"/>
+                <constraint firstAttribute="bottom" secondItem="Lda-Uj-RCY" secondAttribute="bottom" id="j2l-D5-XUL"/>
+                <constraint firstAttribute="trailing" secondItem="Lda-Uj-RCY" secondAttribute="trailing" id="szV-dO-d3k"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="255" height="146"/>
@@ -41,6 +49,7 @@
                 <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="placeholder"/>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="highlightView" destination="Lda-Uj-RCY" id="BPA-39-oSn"/>
                 <outlet property="imageView" destination="t5c-M9-EB1" id="MQc-K9-Sq8"/>
             </connections>
             <point key="canvasLocation" x="296.80000000000001" y="180.80959520239881"/>

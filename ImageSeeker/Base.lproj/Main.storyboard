@@ -104,6 +104,7 @@
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Vz0-3N-7e9" firstAttribute="leading" secondItem="8tG-lS-EI8" secondAttribute="leading" id="Ldd-MP-1lC"/>
                                     <constraint firstAttribute="trailing" secondItem="Vz0-3N-7e9" secondAttribute="trailing" id="WrJ-fZ-7mf"/>
@@ -114,6 +115,9 @@
                                     <constraint firstAttribute="bottom" secondItem="7KS-jC-7yl" secondAttribute="bottom" id="cte-oP-Qce"/>
                                     <constraint firstItem="7KS-jC-7yl" firstAttribute="leading" secondItem="8tG-lS-EI8" secondAttribute="leading" id="kS1-qJ-mv2"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ILj-Rk-mHj" appends="YES" id="UNi-5c-HfK"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,7 +139,7 @@
                     <navigationItem key="navigationItem" id="ST1-6e-SL8"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="navigationItem.title" value="Search"/>
-                        <userDefinedRuntimeAttribute type="image" keyPath="navigationItem.rightButtonWithImage"/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="navigationItem.rightButtonWithImage" value="save"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="counCellstPerRowFactor">
                             <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
@@ -160,8 +164,16 @@
                         <action selector="onCollectionViewDoubleTap:" destination="BYZ-38-t0r" id="MVX-RW-RMd"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="ILj-Rk-mHj">
+                    <connections>
+                        <action selector="onCollectionViewTap:" destination="BYZ-38-t0r" id="se2-VG-Jz8"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="108.39580209895054"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="save" width="51.200000762939453" height="51.200000762939453"/>
+    </resources>
 </document>

@@ -9,14 +9,25 @@
 import UIKit
 import ObjectMapper
 
-class SearchImageItem: Mappable {
+class SearchImageItem: Entity, Mappable {
     
-    var title: String?
-    var link: String?
-    var thumbnailLink: String?
+    @objc var title: String?
+    @objc var link: String?
+    @objc var thumbnailLink: String?
+    
+    init(title: String, link: String, thumbnailLink: String) {
+        super.init(nil)
+        self.title = title
+        self.link = link
+        self.thumbnailLink = thumbnailLink
+    }
     
     required init?(map: Map) {
-        
+        super.init(nil)
+    }
+    
+    required init(_ objectId: String?) {
+        super.init(objectId)
     }
     
     func mapping(map: Map) {

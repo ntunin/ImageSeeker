@@ -26,4 +26,11 @@ struct K {
     struct Notifications {
         static let onRightNavigationButtonClick = NSNotification.Name(rawValue: "onRightNavigationButtonClick")
     }
+    
+    struct Storage {
+        static let containerName = "ImageSeeker"
+        struct Tables {
+            static let SearchImageItems = "SearchImageItems"
+        }
+    }
 }

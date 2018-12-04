@@ -19,12 +19,47 @@ class ImageSeekerTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testGoogleAPI() {
+        let apiExpectation = expectation(description: "Wait while json api returns result")
+        do {
+            let api = try ImageSeekerGoogleAPI()
+            api.getImages("monkeys", page: 1, count: 5) { items, count in
+                assert(items?.count == 5)
+                apiExpectation.fulfill()
+            }
+        } catch {
+            assert(false)
+        }
+        wait(for: [apiExpectation], timeout: 20)
     }
 
+    func testJSONAPI() {
+        let apiExpectation = expectation(description: "Wait while json api returns result")
+        do {
+            let api = try ImageSeekerJSONAPI("response")
+            api.getImages("monkeys", page: 1, count: 5) { items, count in
+                assert(items?.count == 5)
+                apiExpectation.fulfill()
+            }
+        } catch {
+            assert(false)
+        }
+        wait(for: [apiExpectation], timeout: 20)
+    }
+    
+    func testStorageManager() {
+        let entity = SearchImageItem(title: "", link: "", thumbnailLink: "")
+        StorageManager.shared.insert(into: K.Storage.Tables.SearchImageItems, value: entity)
+        guard let items = StorageManager.shared.select(allFromTable: K.Storage.Tables.SearchImageItems) as? [SearchImageItem] else {
+            assert(false)
+        }
+        assert(items.count > 0)
+        StorageManager.shared.delete(from: K.Storage.Tables.SearchImageItems, value: entity)
+    }
+    
+    
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

@@ -27,6 +27,7 @@ final class SearchViewModel {
     
     var keywords: MutableProperty<String>
     var imageItems: MutableProperty<[SearchImageItem]>
+    var savingImageItems: MutableProperty<[SearchImageItem]>
     
     var areKeywordsWrong: Signal<Bool, NoError>
     var noContentStub: Signal<String, NoError>
@@ -39,6 +40,7 @@ final class SearchViewModel {
     init() {
         keywords = MutableProperty("")
         imageItems = MutableProperty([])
+        savingImageItems = MutableProperty([])
         isContentLoading = MutableProperty(false)
         isContentLoaded = MutableProperty(false)
         totalCount = MutableProperty(0)

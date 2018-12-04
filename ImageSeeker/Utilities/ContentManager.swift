@@ -29,10 +29,18 @@ class ContentManager: NSObject {
     }
     
     func loadNextPage(_ query: String, callback: @escaping ([SearchImageItem]?, Int) -> Void) {
-        self.api?.getImages(query, page: self.page, count: self.pageSize) { (items, count) in
-            callback(items, count)
-            self.page += 1
+        DispatchQueue.global().async {
+            self.api?.getImages(query, page: self.page, count: self.pageSize) { (items, count) in
+                DispatchQueue.main.async {
+                    callback(items, count)
+                    self.page += 1
+                }
+            }
         }
+    }
+    
+    func save(_ items: [SearchImageItem]) {
+        StorageManager.shared.insert(into: K.Storage.Tables.SearchImageItems, values: items)
     }
     
     func reset() {
