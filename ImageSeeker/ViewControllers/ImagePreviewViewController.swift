@@ -117,15 +117,15 @@ extension ImagePreviewViewController {
         
         collectionView.isHidden = true
         previewImageView.isHidden = false
-        previewImageView.sd_setImage(with: URL(string: thumbnailLink), completed: nil)
+        previewImageView.loadUrl(thumbnailLink)
         setImagePreviewFrame(viewModel.initialFrame)
         UIView.animate(withDuration: K.Animation.defaultDuration, animations: {
             self.setImagePreviewFrame(top: 0, right: 0, bottom: 0, left: 0)
         }, completion: { completed in
             self.collectionView.isHidden = false //Prepare collectionView before displaying
-            previewImageView.sd_setImage(with: URL(string: link), placeholderImage: self.previewImageView.image, options: [], completed: { (image, error, cacheType, url) in
+            previewImageView.loadUrl( link, placeholder: self.previewImageView.image) {
                 previewImageView.isHidden = true
-            })
+            }
         })
     }
     
@@ -138,7 +138,7 @@ extension ImagePreviewViewController {
         
         collectionView.isHidden = true
         previewImageView.isHidden = false
-        previewImageView.sd_setImage(with: URL(string: thumbnailLink), completed: nil)
+        previewImageView.loadUrl(thumbnailLink)
         UIView.animate(withDuration: K.Animation.defaultDuration, animations: {
             self.setImagePreviewFrame(self.viewModel.initialFrame)
         }, completion: { completed in callback()})

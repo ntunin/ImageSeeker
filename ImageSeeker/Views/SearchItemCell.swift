@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 import ReactiveSwift
 
 class SearchItemCell: UICollectionViewCell {
@@ -50,6 +49,6 @@ class SearchItemCell: UICollectionViewCell {
                 self.imageView.image = self.imageView.placeholder
                 return
         }
-        self.imageView.sd_setImage(with: URL(string: thumbnailLink), placeholderImage: self.imageView.placeholder)
+        self.imageView.loadUrl(thumbnailLink, placeholder: self.imageView.placeholder)
     }
 }

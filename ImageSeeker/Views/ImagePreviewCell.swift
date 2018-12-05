@@ -21,11 +21,15 @@ class ImagePreviewCell: UICollectionViewCell {
     func configure(_ item: SearchImageItem?) {
         self.item = item
         guard let item = item,
-            let imageLink = item.link  else {
+            let imageLink = item.link,
+            let thumbnailLink = item.thumbnailLink else {
                 imageView.image = imageView.placeholder
                 return
         }
-        imageView.sd_setImage(with: URL(string: imageLink), placeholderImage: imageView.placeholder)
+        imageView.loadUrl(thumbnailLink, placeholder: imageView.placeholder) //Just display thumbnail before loading image
+        DispatchQueue.main.async {
+            self.imageView.loadUrl(imageLink, placeholder: self.imageView.placeholder)
+        }
     }
 
 }

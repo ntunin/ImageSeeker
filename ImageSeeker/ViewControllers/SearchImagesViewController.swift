@@ -10,7 +10,6 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import Result
-import SDWebImage
 
 class SearchImagesViewController: UIViewController,
                                   UISearchBarDelegate,
