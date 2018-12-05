@@ -39,15 +39,20 @@ class ImageSeekerGoogleAPI: ImageSeekerAPI {
     }
     
     func getImages(_ query: String, page: Int, count: Int, callback: @escaping ([SearchImageItem]?, Int)->Void) {
-        Alamofire
-            .request("\(base)/v1?key=\(apiKey)&cx=\(engineId)&q=\(query)&start=\((page - 1)*count + 1)&num=\(count)&searchType=image&fields=items,queries")
-            .validate()
-            .responseObject { (r: DataResponse<SearchImagesResponse>) in
-                if let response = r.result.value {
-                    callback(response.items, response.totalCount)                    
+        
+        let urlString = "\(base)/v1?key=\(apiKey)&cx=\(engineId)&q=\(query)&start=\((page - 1)*count + 1)&num=\(count)&searchType=image&fields=items,queries"
+        
+        do {
+            try GET(urlString).responseJSON { response in
+                if let json = response.value,
+                    let searchImagesResponse = SearchImagesResponse(JSON: json) {
+                    callback(searchImagesResponse.items, searchImagesResponse.totalCount)
                 } else {
-                    callback(nil, 0)
+                    callback([], 0)
                 }
+            }
+        } catch {
+            callback([], 0)
         }
     }   
     

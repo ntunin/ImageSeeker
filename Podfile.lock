@@ -14,7 +14,6 @@ PODS:
   - SDWebImage/Core (4.4.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
   - AlamofireObjectMapper (~> 5.2)
   - ReactiveCocoa (~> 8.0.2)
   - SDWebImage (~> 4.0)
@@ -38,6 +37,6 @@ SPEC CHECKSUMS:
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
-PODFILE CHECKSUM: 50bf4f2e22f5bd50af2519feeed5025468825540
+PODFILE CHECKSUM: 0c9f5f59c6f534548625e0a0a0c4a4fbe2b154bc
 
 COCOAPODS: 1.5.3
