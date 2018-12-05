@@ -26,6 +26,7 @@
 		23310A2321B7A69F00DE9F56 /* GET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23310A2221B7A69F00DE9F56 /* GET.swift */; };
 		23310A2721B7AA1300DE9F56 /* JSONResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23310A2621B7AA1300DE9F56 /* JSONResponse.swift */; };
 		23310A2B21B7AD4C00DE9F56 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23310A2A21B7AD4C00DE9F56 /* HTTPResponse.swift */; };
+		23310A2E21B7BAE300DE9F56 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23310A2D21B7BAE300DE9F56 /* Mapper.swift */; };
 		2342F0F221B6ADC40023F52A /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2342F0F121B6ADC40023F52A /* GalleryViewModel.swift */; };
 		235712C721B4F08D0098D4C0 /* ImagePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */; };
 		235712CA21B4F7AB0098D4C0 /* ObjectAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712C921B4F7AB0098D4C0 /* ObjectAssociation.swift */; };
@@ -92,6 +93,7 @@
 		23310A2221B7A69F00DE9F56 /* GET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GET.swift; sourceTree = "<group>"; };
 		23310A2621B7AA1300DE9F56 /* JSONResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONResponse.swift; sourceTree = "<group>"; };
 		23310A2A21B7AD4C00DE9F56 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		23310A2D21B7BAE300DE9F56 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		2342F0F121B6ADC40023F52A /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewModel.swift; sourceTree = "<group>"; };
 		235712C921B4F7AB0098D4C0 /* ObjectAssociation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAssociation.swift; sourceTree = "<group>"; };
@@ -224,6 +226,14 @@
 			path = HTTP;
 			sourceTree = "<group>";
 		};
+		23310A2C21B7BA9800DE9F56 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				23310A2D21B7BAE300DE9F56 /* Mapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
 		235712C821B4F6650098D4C0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +321,7 @@
 		2367BFD421B01FEA005FCF77 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				23310A2C21B7BA9800DE9F56 /* Mapper */,
 				23310A1D21B7A52700DE9F56 /* HTTP */,
 				23D4CD7921B6574200D3598F /* StorageManager */,
 				231537E321B06E7D00B6B627 /* ContentManager.swift */,
@@ -610,6 +621,7 @@
 				2367BFD821B021AA005FCF77 /* K.swift in Sources */,
 				23310A2121B7A68800DE9F56 /* HTTPRequest.swift in Sources */,
 				235712CA21B4F7AB0098D4C0 /* ObjectAssociation.swift in Sources */,
+				23310A2E21B7BAE300DE9F56 /* Mapper.swift in Sources */,
 				2367BFD321B01F66005FCF77 /* ImageSeekerGoogleAPI.swift in Sources */,
 				232B30F321B608EB00418FF0 /* Entity.swift in Sources */,
 				231537E421B06E7D00B6B627 /* ContentManager.swift in Sources */,

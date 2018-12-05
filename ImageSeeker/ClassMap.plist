@@ -36,5 +36,54 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>JSON</key>
+	<dict>
+		<key>ImageSeeker.SearchImagesResponse</key>
+		<dict>
+			<key>totalCount</key>
+			<dict>
+				<key>type</key>
+				<string>Int</string>
+				<key>keyPath</key>
+				<string>queries.request.0.totalResults</string>
+			</dict>
+			<key>items</key>
+			<dict>
+				<key>type</key>
+				<string>Array</string>
+				<key>keyPath</key>
+				<string>items</string>
+				<key>item</key>
+				<dict>
+					<key>type</key>
+					<string>ImageSeeker.SearchImageItem</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>ImageSeeker.SearchImageItem</key>
+		<dict>
+			<key>title</key>
+			<dict>
+				<key>type</key>
+				<string>String</string>
+				<key>keyPath</key>
+				<string>title</string>
+			</dict>
+			<key>link</key>
+			<dict>
+				<key>type</key>
+				<string>String</string>
+				<key>keyPath</key>
+				<string>link</string>
+			</dict>
+			<key>thumbnailLink</key>
+			<dict>
+				<key>type</key>
+				<string>String</string>
+				<key>keyPath</key>
+				<string>image.thumbnailLink</string>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>

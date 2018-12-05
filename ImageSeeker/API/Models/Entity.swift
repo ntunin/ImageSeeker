@@ -13,6 +13,10 @@ class Entity: NSObject {
     
     @objc var objectId: String?
     
+    required override init() {
+        self.objectId = UUID().uuidString
+    }
+    
     required init(_ objectId: String?) {
         self.objectId = objectId
     }

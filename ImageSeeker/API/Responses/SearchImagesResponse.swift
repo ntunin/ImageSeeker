@@ -7,23 +7,9 @@
 //
 
 import UIKit
-import ObjectMapper
 
-class SearchImagesResponse: Mappable {
-    
-    var items: [SearchImageItem]?
-    var totalCount = 0
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        var countString = ""
-        countString <- map["queries.request.0.totalResults"]
-        totalCount = Int(countString) ?? 0
-        items <- map["items"]
-    }
-    
+class SearchImagesResponse: NSObject {
+    @objc var items: [SearchImageItem]?
+    @objc var totalCount = 0    
 
 }

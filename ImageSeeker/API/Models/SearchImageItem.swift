@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class SearchImageItem: Entity, Mappable {
+class SearchImageItem: Entity {
     
     @objc var title: String?
     @objc var link: String?
@@ -22,18 +22,12 @@ class SearchImageItem: Entity, Mappable {
         self.thumbnailLink = thumbnailLink
     }
     
-    required init?(map: Map) {
-        super.init(nil)
-    }
-    
     required init(_ objectId: String?) {
         super.init(objectId)
     }
     
-    func mapping(map: Map) {
-        title <- map["title"]
-        link <- map["link"]
-        thumbnailLink <- map["image.thumbnailLink"]
+    required init() {
+        super.init()
     }
     
 }

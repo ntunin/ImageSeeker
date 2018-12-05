@@ -7,8 +7,6 @@
 ///Users/ntunin/Documents/ImageSeeker/Podfile
 
 import UIKit
-import Alamofire
-import AlamofireObjectMapper
 
 enum GoogleApiError: Error {
     case notInitialized
@@ -45,7 +43,7 @@ class ImageSeekerGoogleAPI: ImageSeekerAPI {
         do {
             try GET(urlString).responseJSON { response in
                 if let json = response.value,
-                    let searchImagesResponse = SearchImagesResponse(JSON: json) {
+                   let searchImagesResponse = Mapper().map(json, to:  SearchImagesResponse.self) as? SearchImagesResponse {
                     callback(searchImagesResponse.items, searchImagesResponse.totalCount)
                 } else {
                     callback([], 0)

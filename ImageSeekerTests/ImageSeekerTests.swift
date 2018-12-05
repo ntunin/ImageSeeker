@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Alamofire
 @testable import ImageSeeker
 
 class ImageSeekerTests: XCTestCase {
@@ -56,6 +55,31 @@ class ImageSeekerTests: XCTestCase {
         }
         assert(items.count > 0)
         PersistentContainerStorageManager.shared.delete(from: K.Storage.Tables.SearchImageItems, value: entity)
+    }
+    
+    func testMapperWithString() {
+        let response = Mapper().map("{ \"queries\": {\"request\": [{\"totalResults\": \"165\"}]} }", to: SearchImagesResponse.self) as? SearchImagesResponse
+        assert(response?.totalCount == 165)
+    }
+    
+    func testMapperWithDictionary() {
+        if let url = Bundle.main.url(forResource: "response", withExtension: "json") {
+
+            do {
+                let data = try Data(contentsOf: url)
+                guard let string = String(data: data, encoding: .utf8),
+                    let response = Mapper().map(string, to: SearchImagesResponse.self) as? SearchImagesResponse,
+                    let i = response.items else {
+                        assert(false)
+                    }
+                assert(i[0].title == "Panama Monkeys Have Begun Using Rocks as Tools | Fortune")
+            } catch {
+                assert(false)
+            }
+        } else {
+            assert(false)
+        }
+        
     }
     
     
