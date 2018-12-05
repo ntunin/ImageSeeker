@@ -25,6 +25,7 @@ struct K {
     
     struct Notifications {
         static let onRightNavigationButtonClick = NSNotification.Name(rawValue: "onRightNavigationButtonClick")
+        static let onLeftNavigationButtonClick = NSNotification.Name(rawValue: "onLeftNavigationButtonClick")
     }
     
     struct Storage {

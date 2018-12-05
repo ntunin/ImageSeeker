@@ -27,7 +27,7 @@ final class SearchViewModel {
     
     var keywords: MutableProperty<String>
     var imageItems: MutableProperty<[SearchImageItem]>
-    var savingImageItems: MutableProperty<[SearchImageItem]>
+    var selectedImageItems: MutableProperty<[SearchImageItem]>
     
     var areKeywordsWrong: Signal<Bool, NoError>
     var noContentStub: Signal<String, NoError>
@@ -40,7 +40,7 @@ final class SearchViewModel {
     init() {
         keywords = MutableProperty("")
         imageItems = MutableProperty([])
-        savingImageItems = MutableProperty([])
+        selectedImageItems = MutableProperty([])
         isContentLoading = MutableProperty(false)
         isContentLoaded = MutableProperty(false)
         totalCount = MutableProperty(0)
@@ -73,10 +73,10 @@ final class SearchViewModel {
         }
         isContentLoading.value = true
         ContentManager.shared.loadNextPage(keywords.value) { items, count in
+            self.isContentLoading.value = false
             guard let items = items else {
                 return
             }
-            self.isContentLoading.value = false
             self.imageItems.value.append(contentsOf: items)
             self.totalCount.value = count
             self.isContentLoaded.value = true

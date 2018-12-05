@@ -20,8 +20,22 @@ extension UINavigationItem {
         }
     }
     
+    @IBInspectable var leftButtonWithImage: UIImage? {
+        set {
+            let button = UIBarButtonItem(image: newValue, style: .plain, target: self, action: #selector(onLeftButtonClick))
+            self.leftBarButtonItem = button
+        }
+        get {
+            return self.leftBarButtonItem?.image
+        }
+    }
+    
     @objc func onRightButtonClick() {
         NotificationCenter.default.post(name: K.Notifications.onRightNavigationButtonClick, object: self)
+    }
+    
+    @objc func onLeftButtonClick() {
+        NotificationCenter.default.post(name: K.Notifications.onLeftNavigationButtonClick, object: self)
     }
     
 }

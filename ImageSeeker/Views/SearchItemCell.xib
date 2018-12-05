@@ -45,9 +45,6 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="255" height="146"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="placeholder"/>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="highlightView" destination="Lda-Uj-RCY" id="BPA-39-oSn"/>
                 <outlet property="imageView" destination="t5c-M9-EB1" id="MQc-K9-Sq8"/>

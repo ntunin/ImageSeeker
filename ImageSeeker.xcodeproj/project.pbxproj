@@ -17,11 +17,12 @@
 		231C8D3221B4ABD2008466B9 /* ImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 231C8D3021B4ABD2008466B9 /* ImagePreviewViewController.xib */; };
 		231CA12921B122C100CED81E /* ImageSeekerJSONAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231CA12821B122C100CED81E /* ImageSeekerJSONAPI.swift */; };
 		231CA12B21B1234100CED81E /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 231CA12A21B1234100CED81E /* response.json */; };
+		231CF45621B6BD28000837FF /* SearchItemCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231CF45521B6BD28000837FF /* SearchItemCollectionViewController.swift */; };
 		231E7BE621B0EABC00C1EAB8 /* SearchItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E7BE421B0EABC00C1EAB8 /* SearchItemCell.swift */; };
 		231E7BE721B0EABC00C1EAB8 /* SearchItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 231E7BE521B0EABC00C1EAB8 /* SearchItemCell.xib */; };
-		2328C80421B5593400A74BA8 /* UINavigationItem+RightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C80321B5593400A74BA8 /* UINavigationItem+RightButton.swift */; };
 		232B30F121B6088400418FF0 /* ClassMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 232B30F021B6088400418FF0 /* ClassMap.plist */; };
 		232B30F321B608EB00418FF0 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B30F221B608EB00418FF0 /* Entity.swift */; };
+		2342F0F221B6ADC40023F52A /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2342F0F121B6ADC40023F52A /* GalleryViewModel.swift */; };
 		235712C721B4F08D0098D4C0 /* ImagePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */; };
 		235712CA21B4F7AB0098D4C0 /* ObjectAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712C921B4F7AB0098D4C0 /* ObjectAssociation.swift */; };
 		235712CC21B4F80D0098D4C0 /* UICollectionView+registerCellWithNibName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235712CB21B4F80D0098D4C0 /* UICollectionView+registerCellWithNibName.swift */; };
@@ -42,6 +43,9 @@
 		23D4CD7B21B6575800D3598F /* PersistentContainerStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4CD7A21B6575800D3598F /* PersistentContainerStorageManager.swift */; };
 		23D4CD7D21B6577F00D3598F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4CD7C21B6577F00D3598F /* StorageManager.swift */; };
 		23D4CD7F21B665C600D3598F /* PersistentStoreCoordinatorStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4CD7E21B665C600D3598F /* PersistentStoreCoordinatorStorageManager.swift */; };
+		23D4CD8321B677C500D3598F /* UINavigationItem+ButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4CD8221B677C500D3598F /* UINavigationItem+ButtonItem.swift */; };
+		23D4CD8621B67B5E00D3598F /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4CD8421B67B5E00D3598F /* GalleryViewController.swift */; };
+		23D4CD8721B67B5E00D3598F /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23D4CD8521B67B5E00D3598F /* GalleryViewController.xib */; };
 		630E39815C7B2CBB1E94C712 /* Pods_ImageSeeker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7530D18E49D7BA33A0F17C5C /* Pods_ImageSeeker.framework */; };
 		7FDD57F278A5267C7A61CD16 /* Pods_ImageSeekerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA9E8DA14A2D878BBD9F8EB /* Pods_ImageSeekerTests.framework */; };
 /* End PBXBuildFile section */
@@ -75,11 +79,12 @@
 		231C8D3021B4ABD2008466B9 /* ImagePreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePreviewViewController.xib; sourceTree = "<group>"; };
 		231CA12821B122C100CED81E /* ImageSeekerJSONAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSeekerJSONAPI.swift; sourceTree = "<group>"; };
 		231CA12A21B1234100CED81E /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
+		231CF45521B6BD28000837FF /* SearchItemCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemCollectionViewController.swift; sourceTree = "<group>"; };
 		231E7BE421B0EABC00C1EAB8 /* SearchItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemCell.swift; sourceTree = "<group>"; };
 		231E7BE521B0EABC00C1EAB8 /* SearchItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchItemCell.xib; sourceTree = "<group>"; };
-		2328C80321B5593400A74BA8 /* UINavigationItem+RightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+RightButton.swift"; sourceTree = "<group>"; };
 		232B30F021B6088400418FF0 /* ClassMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ClassMap.plist; sourceTree = "<group>"; };
 		232B30F221B608EB00418FF0 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		2342F0F121B6ADC40023F52A /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewModel.swift; sourceTree = "<group>"; };
 		235712C921B4F7AB0098D4C0 /* ObjectAssociation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAssociation.swift; sourceTree = "<group>"; };
 		235712CB21B4F80D0098D4C0 /* UICollectionView+registerCellWithNibName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+registerCellWithNibName.swift"; sourceTree = "<group>"; };
@@ -107,6 +112,9 @@
 		23D4CD7A21B6575800D3598F /* PersistentContainerStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentContainerStorageManager.swift; sourceTree = "<group>"; };
 		23D4CD7C21B6577F00D3598F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		23D4CD7E21B665C600D3598F /* PersistentStoreCoordinatorStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStoreCoordinatorStorageManager.swift; sourceTree = "<group>"; };
+		23D4CD8221B677C500D3598F /* UINavigationItem+ButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+ButtonItem.swift"; sourceTree = "<group>"; };
+		23D4CD8421B67B5E00D3598F /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		23D4CD8521B67B5E00D3598F /* GalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
 		41B56E6DC72DC68AA5F9A4B2 /* Pods-ImageSeekerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSeekerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImageSeekerUITests/Pods-ImageSeekerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4EA9E8DA14A2D878BBD9F8EB /* Pods_ImageSeekerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImageSeekerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DB2C81752DF037B4AAC541 /* Pods-ImageSeekerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSeekerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImageSeekerUITests/Pods-ImageSeekerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +176,9 @@
 				231537DB21B04CE100B6B627 /* SearchImagesViewController.swift */,
 				231C8D2F21B4ABD2008466B9 /* ImagePreviewViewController.swift */,
 				231C8D3021B4ABD2008466B9 /* ImagePreviewViewController.xib */,
+				23D4CD8421B67B5E00D3598F /* GalleryViewController.swift */,
+				23D4CD8521B67B5E00D3598F /* GalleryViewController.xib */,
+				231CF45521B6BD28000837FF /* SearchItemCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 				23A99BBF21B5659F0042AA11 /* SearchItemCellViewModel.swift */,
 				231537E021B0523900B6B627 /* SearchViewModel.swift */,
 				235712C621B4F08D0098D4C0 /* ImagePreviewViewModel.swift */,
+				2342F0F121B6ADC40023F52A /* GalleryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -196,9 +208,9 @@
 		235712C821B4F6650098D4C0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				23D4CD8221B677C500D3598F /* UINavigationItem+ButtonItem.swift */,
 				235712CB21B4F80D0098D4C0 /* UICollectionView+registerCellWithNibName.swift */,
 				235712D121B4FE860098D4C0 /* UIImageView+Placeholder.swift */,
-				2328C80321B5593400A74BA8 /* UINavigationItem+RightButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -431,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				231E7BE721B0EABC00C1EAB8 /* SearchItemCell.xib in Resources */,
+				23D4CD8721B67B5E00D3598F /* GalleryViewController.xib in Resources */,
 				2367BFAC21B01E7E005FCF77 /* LaunchScreen.storyboard in Resources */,
 				2367BFA921B01E7E005FCF77 /* Assets.xcassets in Resources */,
 				231CA12B21B1234100CED81E /* response.json in Resources */,
@@ -574,20 +587,23 @@
 				231537D721B041B800B6B627 /* SearchImageItem.swift in Sources */,
 				2367BFD821B021AA005FCF77 /* K.swift in Sources */,
 				235712CA21B4F7AB0098D4C0 /* ObjectAssociation.swift in Sources */,
-				2328C80421B5593400A74BA8 /* UINavigationItem+RightButton.swift in Sources */,
 				2367BFD321B01F66005FCF77 /* ImageSeekerGoogleAPI.swift in Sources */,
 				232B30F321B608EB00418FF0 /* Entity.swift in Sources */,
 				231537E421B06E7D00B6B627 /* ContentManager.swift in Sources */,
+				23D4CD8621B67B5E00D3598F /* GalleryViewController.swift in Sources */,
 				2367BF9F21B01E7D005FCF77 /* AppDelegate.swift in Sources */,
+				23D4CD8321B677C500D3598F /* UINavigationItem+ButtonItem.swift in Sources */,
 				231537D921B0499F00B6B627 /* SearchImagesResponse.swift in Sources */,
 				231537E121B0523900B6B627 /* SearchViewModel.swift in Sources */,
 				23D4CD7D21B6577F00D3598F /* StorageManager.swift in Sources */,
 				235712CF21B4FDE70098D4C0 /* ImagePreviewCell.swift in Sources */,
 				235712C721B4F08D0098D4C0 /* ImagePreviewViewModel.swift in Sources */,
 				2367BFA721B01E7D005FCF77 /* ImageSeeker.xcdatamodeld in Sources */,
+				2342F0F221B6ADC40023F52A /* GalleryViewModel.swift in Sources */,
 				235712CC21B4F80D0098D4C0 /* UICollectionView+registerCellWithNibName.swift in Sources */,
 				2367BFD121B01ED1005FCF77 /* ImageSeekerAPI.swift in Sources */,
 				235712D221B4FE860098D4C0 /* UIImageView+Placeholder.swift in Sources */,
+				231CF45621B6BD28000837FF /* SearchItemCollectionViewController.swift in Sources */,
 				23D4CD7B21B6575800D3598F /* PersistentContainerStorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

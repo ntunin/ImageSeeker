@@ -16,7 +16,7 @@ class ContentManager: NSObject {
     let api: ImageSeekerAPI?
     var storageManager: StorageManager?
     var page = 1
-    var pageSize = 50
+    var pageSize = 10
     
     static let shared = ContentManager()
 
@@ -51,8 +51,39 @@ class ContentManager: NSObject {
         }
     }
     
+    func load() -> [SearchImageItem] {
+        guard let storageManager = storageManager,
+            let items = storageManager.select(allFromTable: K.Storage.Tables.SearchImageItems) as? [SearchImageItem] else {
+            return []
+        }
+        return items
+    }
+    
+    func remove(_ items: [SearchImageItem]) {
+        if let storageManager = storageManager {
+            storageManager.delete(from: K.Storage.Tables.SearchImageItems, values: items)
+        }
+    }
+    
     func reset() {
         page = 1
+    }
+    
+    func loadImage(_ urlString: String, callback: @escaping (UIImage?)->Void) {
+        DispatchQueue.global().async {
+            if let url = URL(string: urlString) {
+                do {
+                    let data = try Data(contentsOf: url)
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        callback(image)
+                    }
+                } catch {
+                    callback(nil)
+                }
+            }
+        }
+        
     }
     
 }

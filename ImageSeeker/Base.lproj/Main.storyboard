@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-767" y="108"/>
         </scene>
-        <!--Search Images View Controller-->
+        <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SearchImagesViewController" customModule="ImageSeeker" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,16 +135,21 @@
                             <outletCollection property="gestureRecognizers" destination="bq3-3h-Xcf" appends="YES" id="tlE-Mt-5T8"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="ST1-6e-SL8"/>
+                    <navigationItem key="navigationItem" title="Search" id="ST1-6e-SL8">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="rightButtonWithImage" value="save"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="leftButtonWithImage" value="library"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="navigationItem.title" value="Search"/>
-                        <userDefinedRuntimeAttribute type="image" keyPath="navigationItem.rightButtonWithImage" value="save"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="counCellstPerRowFactor">
                             <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="collectionView" destination="7KS-jC-7yl" id="oq8-0t-Aff"/>
+                        <outlet property="collectionViewDoubleTapGesture" destination="whU-IX-Pou" id="mUw-AC-bsT"/>
+                        <outlet property="collectionViewTapGesture" destination="ILj-Rk-mHj" id="tu3-YT-bfz"/>
                         <outlet property="noContentStubActivityIndicator" destination="p0o-L2-FiQ" id="WiT-nq-6oY"/>
                         <outlet property="noContentStubLabel" destination="H0i-v5-XNu" id="2Kd-mC-pt9"/>
                         <outlet property="noContentStubView" destination="Vz0-3N-7e9" id="1e6-Wu-O4H"/>
@@ -153,17 +158,17 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="bq3-3h-Xcf">
+                <tapGestureRecognizer delaysTouchesBegan="YES" id="bq3-3h-Xcf">
                     <connections>
                         <action selector="onNoContentStubViewTap:" destination="BYZ-38-t0r" id="Tt1-rm-WLk"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="whU-IX-Pou">
+                <tapGestureRecognizer delaysTouchesBegan="YES" delaysTouchesEnded="NO" numberOfTapsRequired="2" id="whU-IX-Pou">
                     <connections>
                         <action selector="onCollectionViewDoubleTap:" destination="BYZ-38-t0r" id="MVX-RW-RMd"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="ILj-Rk-mHj">
+                <tapGestureRecognizer delaysTouchesBegan="YES" id="ILj-Rk-mHj">
                     <connections>
                         <action selector="onCollectionViewTap:" destination="BYZ-38-t0r" id="se2-VG-Jz8"/>
                     </connections>
@@ -173,6 +178,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="library" width="51.200000762939453" height="51.200000762939453"/>
         <image name="save" width="51.200000762939453" height="51.200000762939453"/>
     </resources>
 </document>

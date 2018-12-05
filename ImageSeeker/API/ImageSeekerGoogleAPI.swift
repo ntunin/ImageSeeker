@@ -42,9 +42,11 @@ class ImageSeekerGoogleAPI: ImageSeekerAPI {
         Alamofire
             .request("\(base)/v1?key=\(apiKey)&cx=\(engineId)&q=\(query)&start=\((page - 1)*count + 1)&num=\(count)&searchType=image&fields=items,queries")
             .validate()
-            .responseObject { (response: DataResponse<SearchImagesResponse>) in
-                if let response = response.result.value {
+            .responseObject { (r: DataResponse<SearchImagesResponse>) in
+                if let response = r.result.value {
                     callback(response.items, response.totalCount)                    
+                } else {
+                    callback(nil, 0)
                 }
         }
     }   

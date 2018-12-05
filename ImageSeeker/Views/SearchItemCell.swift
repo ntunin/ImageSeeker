@@ -17,6 +17,12 @@ class SearchItemCell: UICollectionViewCell {
     
     var viewModel = SearchItemCellViewModel()
     
+    var item: SearchImageItem? {
+        get {
+            return viewModel.item.value
+        }
+    }
+    
     override var isSelected: Bool {
         get {
             return viewModel.selected.value

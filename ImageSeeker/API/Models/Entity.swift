@@ -10,6 +10,7 @@ import UIKit
 
 class Entity: NSObject {
     
+    
     @objc var objectId: String?
     
     required init(_ objectId: String?) {

@@ -17,7 +17,8 @@ class SearchImagesViewController: UIViewController,
                                   UICollectionViewDelegate,
                                   UICollectionViewDataSource,
                                   UICollectionViewDataSourcePrefetching,
-                                  UICollectionViewDelegateFlowLayout {
+                                  UICollectionViewDelegateFlowLayout,
+SearchItemCollectionViewController {
     
     @IBOutlet weak var noContentStubLabel: UILabel!
     @IBOutlet weak var noContentStubActivityIndicator: UIActivityIndicatorView!
@@ -26,11 +27,16 @@ class SearchImagesViewController: UIViewController,
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet var collectionViewTapGesture: UITapGestureRecognizer!
+    @IBOutlet var collectionViewDoubleTapGesture: UITapGestureRecognizer!
+    
+    
     @IBInspectable var counCellstPerRowFactor = 1.0
     
     private let viewModel = SearchViewModel()
     
     private let previewViewController = ImagePreviewViewController()
+    private let galleryViewController = GalleryViewController()
 }
 
 extension SearchImagesViewController {
@@ -46,21 +52,26 @@ extension SearchImagesViewController {
         searchButton.reactive.isEnabled <~ isNotLoadingSignal
         noContentStubView.reactive.isHidden <~ viewModel.isContentLoaded
         collectionView.reactive.isHidden <~ viewModel.isContentLoaded.map({ value in !value  })
-        navigationItem.rightBarButtonItem?.reactive.isEnabled <~ viewModel.savingImageItems.signal.map({items in items.count > 0})
+        navigationItem.rightBarButtonItem?.reactive.isEnabled <~ viewModel.selectedImageItems.signal.map({items in items.count > 0})
         
         if let search = viewModel.search {
             searchButton.reactive.pressed = CocoaAction(search)
         }
         
         viewModel.imageItems.signal.observe { signal in
-            self.collectionView.reloadData() 
+            self.collectionView.reloadData()
+            DispatchQueue.main.async { //Wait while collection view will redraw cells
+                self.prefetchItemsIfNeeded()                
+            }
         }
         
         collectionView.register(K.SearchItemCell.nib, forCellWithReuseIdentifier: K.SearchItemCell.reuseIdentifier)
         
         viewModel.keywords.value = ""
         viewModel.isContentLoading.value = false
-        viewModel.savingImageItems.value = []
+        viewModel.selectedImageItems.value = []
+        
+        collectionViewTapGesture.require(toFail: collectionViewDoubleTapGesture)
         
         if #available(iOS 10.0, *) {
             collectionView.prefetchDataSource = self
@@ -71,11 +82,13 @@ extension SearchImagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(onSaveButtonClick), name: K.Notifications.onRightNavigationButtonClick, object: self.navigationItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(onOpenGalleryButtonClick), name: K.Notifications.onLeftNavigationButtonClick, object: self.navigationItem)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: K.Notifications.onRightNavigationButtonClick, object: self.navigationItem)
+        NotificationCenter.default.removeObserver(self, name: K.Notifications.onLeftNavigationButtonClick, object: self.navigationItem)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -88,60 +101,31 @@ extension SearchImagesViewController {
     }
     
     @IBAction func onCollectionViewTap(_ sender: UITapGestureRecognizer) {
-        guard let indexPath = getIndexPath(sender),
-              let cell = collectionView.cellForItem(at: indexPath) as? SearchItemCell  else {
-            return
-        }
-        let item = viewModel.imageItems.value[indexPath.row]
-        if(cell.isSelected) {
-            viewModel.savingImageItems.value = viewModel.savingImageItems.value.filter({ i in i != item })
-            cell.isSelected = false
-        } else {
-            viewModel.savingImageItems.value.append(item)
-            cell.isSelected = true
-        }
+        didCollectionViewTap(sender)
     }
     
     
     @IBAction func onCollectionViewDoubleTap(_ sender: UITapGestureRecognizer) {
-        guard let indexPath = getIndexPath(sender) else {
-            return
-        }
-        self.collectionView(collectionView, didDoubleTappedItemAt: indexPath)
+        didCollectionViewDoubleTap(sender)
     }
     
     @objc func onSaveButtonClick() {
-        ContentManager.shared.save(viewModel.savingImageItems.value)
-        deselectAll()
-        viewModel.savingImageItems.value.removeAll()
-        displayAlert("Successfully saved")
-    }
-    
-    private func getIndexPath(_ forGestureRecognizer: UIGestureRecognizer) -> IndexPath? {
-        let point = forGestureRecognizer.location(in: collectionView)
-        return collectionView.indexPathForItem(at: point)
-    }
-    
-    private func deselectAll() {
-        let count = collectionView.numberOfItems(inSection: 0)
-        for i in 0..<count {
-            let indexPath = IndexPath(row: 0, section: i)
-            collectionView.deselectItem(at: indexPath, animated: false)
-        }
+        ContentManager.shared.save(viewModel.selectedImageItems.value)
+        viewModel.selectedImageItems.value.removeAll()
+        displayAlert("Save", message: "Successfully saved", accept: {})
         collectionView.reloadData()
     }
     
-    private func displayAlert(_ message: String) {
-        let alert = UIAlertController(title: "Save", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    @objc func onOpenGalleryButtonClick() {
+        navigationController?.pushViewController(galleryViewController, animated: true)
     }
 }
 
 extension SearchImagesViewController {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.totalCount.value
+        let preferedCount = viewModel.imageItems.value.count + 50
+        return min(viewModel.totalCount.value, preferedCount)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -151,7 +135,9 @@ extension SearchImagesViewController {
         if needToLoad(indexPath) {
             cell.configure(nil)
         } else {
-            cell.configure(viewModel.imageItems.value[indexPath.row])
+            let cellItem = viewModel.imageItems.value[indexPath.row]
+            cell.configure(cellItem)
+            cell.isSelected = viewModel.selectedImageItems.value.filter { item in item == cellItem}.count > 0            
         }
         return cell
     }
@@ -169,12 +155,6 @@ extension SearchImagesViewController {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDoubleTappedItemAt: IndexPath) {
-        let indexPath = didDoubleTappedItemAt
-        previewViewController.display(index: indexPath.row, of: self.viewModel.imageItems.value)
-        navigationController?.pushViewController(previewViewController, animated: true)
-    }
-    
     func needToLoad(_ indexPath: IndexPath) -> Bool{
         return indexPath.row >= viewModel.imageItems.value.count
     }
@@ -182,14 +162,18 @@ extension SearchImagesViewController {
 
 
 extension SearchImagesViewController {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if #available(iOS 10.0, *) { // For iOS 10.0 an grater will be used defeult prefetch functionality
+        prefetchItemsIfNeeded()
+    }
+    
+    func prefetchItemsIfNeeded() {
+        if #available(iOS 10.0, *) { // For iOS 10.0 and grater will be used default prefetch functionality
             return
         }
         if viewModel.isContentLoading.value {
             return
         }
-        
         if let lastVisibleCell = collectionView.visibleCells.last,
             let indexPath = collectionView.indexPathForItem(at: lastVisibleCell.frame.origin) {
             let firstPrefetchingIndex = collectionView.visibleCells.count
@@ -202,6 +186,35 @@ extension SearchImagesViewController {
                 self.collectionView(collectionView, prefetchItemsAt: indexPaths)
             }
         }
-        
     }
+}
+
+extension SearchImagesViewController {
+
+    func getCollectionView() -> UICollectionView {
+        return collectionView
+    }
+    
+    func getItems() -> [SearchImageItem] {
+        return viewModel.imageItems.value
+    }
+    
+    func selectItem(_ item: SearchImageItem) {
+        viewModel.selectedImageItems.value.append(item)
+    }
+    
+    func deselectItem(_ item: SearchImageItem) {
+        viewModel.selectedImageItems.value = viewModel.selectedImageItems.value.filter({ i in i != item })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDoubleTappedItemAt: IndexPath) {
+        let indexPath = didDoubleTappedItemAt
+        previewViewController.display(index: indexPath.row, of: self.viewModel.imageItems.value)
+        navigationController?.pushViewController(previewViewController, animated: true)
+    }
+    
+    func present(_ controller: UIViewController) {
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 }

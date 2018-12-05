@@ -7,11 +7,11 @@
 		<key>API</key>
 		<string>https://www.googleapis.com/customsearch</string>
 		<key>API_KEY</key>
-		<string>AIzaSyD1JquWc1_MbW9tlkuCqMdROBwIEp_ZcAY</string>
+		<string>AIzaSyCLIwDhLmErEVQ-Hbw0dl8aHyPtdusjLXs</string>
 		<key>version</key>
 		<string>v1</string>
 		<key>engineId</key>
-		<string>000673781495968540928:qj0eez8kqzw</string>
+		<string>000673781495968540928:hkfxp9nc2ze</string>
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
@@ -52,5 +52,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App saves images into iOS Photo Library</string>
 </dict>
 </plist>
