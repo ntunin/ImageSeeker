@@ -13,10 +13,12 @@ import Result
 final class ImagePreviewViewModel {
     var imageItems: MutableProperty<[SearchImageItem]>?
     var index: MutableProperty<Int>
+    var initialFrame: CGRect
     
     init() {
         imageItems = MutableProperty([])
         index = MutableProperty(0)
+        initialFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
     func prevIndex() {

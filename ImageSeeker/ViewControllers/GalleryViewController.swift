@@ -144,8 +144,9 @@ extension GalleryViewController {
     
     func collectionView(_ collectionView: UICollectionView, didDoubleTappedItemAt: IndexPath) {
         let indexPath = didDoubleTappedItemAt
-        previewViewController.display(index: indexPath.row, of: self.viewModel.imageItems.value)
-        navigationController?.pushViewController(previewViewController, animated: true)
+        let frame = getVisibleFrame(ofIndexPath: indexPath)
+        previewViewController.display(index: indexPath.row, frame: frame, of: self.viewModel.imageItems.value)
+        navigationController?.pushViewController(previewViewController, animated: false)
     }
     
     func present(_ controller: UIViewController) {

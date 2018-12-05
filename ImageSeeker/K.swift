@@ -34,4 +34,8 @@ struct K {
             static let SearchImageItems = "SearchImageItems"
         }
     }
+    
+    struct Animation {
+        static let defaultDuration = 0.3
+    }
 }

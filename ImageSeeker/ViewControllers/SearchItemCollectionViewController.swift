@@ -18,6 +18,7 @@ protocol SearchItemCollectionViewController {
     func selectItem(_ item: SearchImageItem)
     func deselectItem(_ item: SearchImageItem)
     func present(_ controller: UIViewController)
+    func getVisibleFrame(ofIndexPath indexPath: IndexPath) -> CGRect
 }
 
 extension SearchItemCollectionViewController {
@@ -65,6 +66,15 @@ extension SearchItemCollectionViewController {
         let collectionView = getCollectionView()
         let point = forGestureRecognizer.location(in: collectionView)
         return collectionView.indexPathForItem(at: point)
+    }
+    
+    
+    func getVisibleFrame(ofIndexPath indexPath: IndexPath) -> CGRect {
+        let collectionView = getCollectionView()
+        let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+        let frame = attributes?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+        let visibleFrame = collectionView.convert(frame, to: collectionView.superview)
+        return visibleFrame
     }
 
 }
