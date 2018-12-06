@@ -38,20 +38,19 @@ class ImageSeekerGoogleAPI: ImageSeekerAPI {
     
     func getImages(_ query: String, page: Int, count: Int, callback: @escaping ([SearchImageItem]?, Int)->Void) {
         
-        let urlString = "\(base)/v1?key=\(apiKey)&cx=\(engineId)&q=\(query)&start=\((page - 1)*count + 1)&num=\(count)&searchType=image&fields=items,queries"
-        
-        do {
-            try GET(urlString).responseJSON { response in
-                if let json = response.value,
-                   let searchImagesResponse = Mapper().map(json, to:  SearchImagesResponse.self) as? SearchImagesResponse {
-                    callback(searchImagesResponse.items, searchImagesResponse.totalCount)
-                } else {
-                    callback([], 0)
-                }
+        GET(buildUrlString(query, page: page, count: count)).responseJSON { response in
+            if let json = response.value,
+                let searchImagesResponse = Mapper<SearchImagesResponse>().map(json) {
+                callback(searchImagesResponse.items, searchImagesResponse.totalCount)
+            } else {
+                callback([], 0)
             }
-        } catch {
-            callback([], 0)
         }
-    }   
+        
+    }
+    
+    private func buildUrlString(_ query: String, page: Int, count: Int) -> String {
+        return "\(base)/v1?key=\(apiKey)&cx=\(engineId)&q=\(query)&start=\((page - 1)*count + 1)&num=\(count)&searchType=image&fields=items,queries"
+    }
     
 }

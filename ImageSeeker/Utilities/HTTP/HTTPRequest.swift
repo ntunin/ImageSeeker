@@ -9,14 +9,17 @@
 import UIKit
 
 protocol HTTPRequest {
-    func getUrlRequest() -> URLRequest
+    func getUrlRequest() -> URLRequest?
 }
 
 extension HTTPRequest {
     
     func resumeDataDask(_ completionHandler: @escaping (Data?, URLResponse?, Error?)->Void) {
-        let urlRequest = getUrlRequest()
-        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: completionHandler)
-        task.resume()
+        if let urlRequest = getUrlRequest() {
+            let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: completionHandler)
+            task.resume()            
+        } else {
+            completionHandler(nil, nil, K.HTTP.Errors.invalidRequest)
+        }
     }
 }

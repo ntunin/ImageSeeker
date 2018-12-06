@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import ReactiveCocoa
-import ReactiveSwift
-import Result
 
 class ContentManager: NSObject {
     

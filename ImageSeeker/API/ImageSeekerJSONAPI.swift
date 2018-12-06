@@ -16,7 +16,7 @@ class ImageSeekerJSONAPI: ImageSeekerAPI {
         if let url = Bundle.main.url(forResource: jsonName, withExtension: "json") {
             let data = try Data(contentsOf: url)
             let string = String(data: data, encoding: .utf8)!
-            response = Mapper().map(string, to:  SearchImagesResponse.self) as? SearchImagesResponse
+            response = Mapper<SearchImagesResponse>().map(string)
         } else {
             response = nil
         }

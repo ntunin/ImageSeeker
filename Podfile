@@ -5,8 +5,6 @@ target 'ImageSeeker' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   
-  pod 'ReactiveCocoa', '~> 8.0.2'
-
   target 'ImageSeekerTests' do
     inherit! :search_paths
     

@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import ReactiveSwift
-import Result
 
 final class GalleryViewModel {
     var imageItems: MutableProperty<[SearchImageItem]>

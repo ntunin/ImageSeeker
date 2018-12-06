@@ -58,7 +58,7 @@ class ImageSeekerTests: XCTestCase {
     }
     
     func testMapperWithString() {
-        let response = Mapper().map("{ \"queries\": {\"request\": [{\"totalResults\": \"165\"}]} }", to: SearchImagesResponse.self) as? SearchImagesResponse
+        let response = PlistMapper().map("{ \"queries\": {\"request\": [{\"totalResults\": \"165\"}]} }", to: SearchImagesResponse.self) as? SearchImagesResponse
         assert(response?.totalCount == 165)
     }
     
@@ -68,7 +68,7 @@ class ImageSeekerTests: XCTestCase {
             do {
                 let data = try Data(contentsOf: url)
                 guard let string = String(data: data, encoding: .utf8),
-                    let response = Mapper().map(string, to: SearchImagesResponse.self) as? SearchImagesResponse,
+                    let response = PlistMapper().map(string, to: SearchImagesResponse.self) as? SearchImagesResponse,
                     let i = response.items else {
                         assert(false)
                     }

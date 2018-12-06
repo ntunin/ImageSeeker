@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ReactiveSwift
 
 class SearchItemCell: UICollectionViewCell {
     
@@ -33,7 +32,7 @@ class SearchItemCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        highlightView.reactive.isHidden <~ viewModel.selected.map({ value in !value})
+        highlightView.binding.isHidden <~ viewModel.selected.signal.map({ value in !value})
         viewModel.item.signal.observe { signal in
             self.updateContent()
         }

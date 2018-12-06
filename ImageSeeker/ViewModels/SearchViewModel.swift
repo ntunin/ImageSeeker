@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import ReactiveSwift
-import Result
 
 final class SearchViewModel {
     
@@ -29,13 +27,14 @@ final class SearchViewModel {
     var imageItems: MutableProperty<[SearchImageItem]>
     var selectedImageItems: MutableProperty<[SearchImageItem]>
     
-    var areKeywordsWrong: Signal<Bool, NoError>
-    var noContentStub: Signal<String, NoError>
+    var areKeywordsWrong: Signal<Bool, Error>
+    var noContentStub: Signal<String, Error>
     var isContentLoading: MutableProperty<Bool>
     var isContentLoaded: MutableProperty<Bool>
     var totalCount: MutableProperty<Int>
+    var imagesReceiver: (([SearchImageItem]?, Int)->Void)?
     
-    var search: Action<(), (), AnyError>?
+    var search: Action?
     
     init() {
         keywords = MutableProperty("")
@@ -58,12 +57,12 @@ final class SearchViewModel {
                 ContentManager.shared.reset()
                 self.imageItems.value.removeAll()
                 self.isContentLoaded.value = false
+                self.isContentLoading.value = false
+                self.imagesReceiver = nil
             }
         }
         
-        search = Action { _ in
-            return SignalProducer(self.loadNextPage)
-        }
+        search = Action(loadNextPage)
         
     }
     
@@ -72,14 +71,23 @@ final class SearchViewModel {
             return
         }
         isContentLoading.value = true
-        ContentManager.shared.loadNextPage(keywords.value) { items, count in
+        imagesReceiver = { items, count in
             self.isContentLoading.value = false
             guard let items = items else {
+                return
+            }
+            if self.areKeywordsWrong.property?.value ?? false {
                 return
             }
             self.imageItems.value.append(contentsOf: items)
             self.totalCount.value = count
             self.isContentLoaded.value = true
+        }
+        
+        ContentManager.shared.loadNextPage(keywords.value){ items, count in
+            if let imagesReceiver = self.imagesReceiver {
+                imagesReceiver(items, count)
+            }
         }
     }
         

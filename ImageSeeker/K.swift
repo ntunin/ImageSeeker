@@ -38,4 +38,27 @@ struct K {
     struct Animation {
         static let defaultDuration = 0.3
     }
+    
+    struct Binding {
+        
+        struct Property {
+            static let keyPath = "_value"            
+        }
+        
+        struct Signal {
+            static let keyPath = "_property._value"
+        }
+        
+        struct UISearchBarBinding {
+            struct Text {
+                static let keyPath = "searchBar._text"
+            }
+        }
+    }
+    
+    struct HTTP {
+        struct Errors {
+            static let invalidRequest = NSError(domain: "localhost", code: -1, userInfo: ["message" : "an invalid request provided"])
+        }
+    }
 }

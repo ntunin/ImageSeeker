@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ReactiveSwift
 
 class GalleryViewController: UIViewController,
                              UICollectionViewDelegate,
@@ -16,48 +15,22 @@ class GalleryViewController: UIViewController,
                              SearchItemCollectionViewController {
     
     private let previewViewController = ImagePreviewViewController()
+    
+    let viewModel = GalleryViewModel()
+    
+    @IBInspectable var countCellsPerRowFactor = 1.0
+    
+    
+    @IBOutlet weak var noContentStubView: UIView!
     @IBOutlet weak var exportButton: UIBarButtonItem!
     @IBOutlet weak var removeButton: UIBarButtonItem!
     @IBOutlet weak var toolbar: UIToolbar!
-    
-    
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBInspectable var countCellsPerRowFactor = 1.0
-    
     @IBOutlet var collectionViewTapGesture: UITapGestureRecognizer!
     @IBOutlet var collectionViewDoubleTapGesture: UITapGestureRecognizer!
     
     
-    let viewModel = GalleryViewModel()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let areItemsSelectedSignal = viewModel.selectedImageItems.signal.map({items in items.count > 0})
-        if let items = toolbar.items {
-            for item in items {
-                item.reactive.isEnabled <~ areItemsSelectedSignal
-            }
-        }
-        viewModel.imageItems.signal.observe { signal in
-            self.collectionView.reloadData()
-        }
-        
-        viewModel.selectedImageItems.value = []
-        collectionViewTapGesture.require(toFail: collectionViewDoubleTapGesture)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        reloadItems()
-    }
-    
-    func reloadItems() {
-        viewModel.imageItems.value = ContentManager.shared.load()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
     
     @IBAction func onCollectionViewTap(_ sender: UITapGestureRecognizer) {
         didCollectionViewTap(sender)
@@ -82,6 +55,41 @@ class GalleryViewController: UIViewController,
             self.viewModel.selectedImageItems.value.removeAll()
             self.collectionView.reloadData()
         }, decline: {})
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let areItemsSelectedSignal = viewModel.selectedImageItems.signal.map({items in items.count > 0})
+        if let items = toolbar.items {
+            for item in items {
+                item.binding.isEnabled <~ areItemsSelectedSignal
+            }
+        }
+        
+        noContentStubView.binding.isHidden <~ viewModel.imageItems.signal.map({items in items.count > 0})
+        backButton.binding.pressed = Action {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        viewModel.imageItems.signal.observe { signal in
+            self.collectionView.reloadData()
+        }
+        
+        viewModel.selectedImageItems.value = []
+        collectionViewTapGesture.require(toFail: collectionViewDoubleTapGesture)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadItems()
+    }
+    
+    func reloadItems() {
+        viewModel.imageItems.value = ContentManager.shared.load()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func exportSelectedImages() {

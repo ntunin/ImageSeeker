@@ -11,17 +11,15 @@ import UIKit
 class GET: HTTPRequest {
     
     
-    let urlRequest: URLRequest
+    private var urlRequest: URLRequest?
     
-    init(_ urlString: String) throws {
+    init(_ urlString: String) {
         if let url = URL(string: urlString) {
             urlRequest = URLRequest(url: url)
-        } else {
-            throw NSError(domain: "co.ntunin.imageseacker", code: -1, userInfo: ["message": "Could not create a url request"])
-        }        
+        }
     }
     
-    func getUrlRequest() -> URLRequest {
+    func getUrlRequest() -> URLRequest? {
         return urlRequest
     }
     

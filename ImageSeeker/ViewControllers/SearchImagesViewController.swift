@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import ReactiveCocoa
-import ReactiveSwift
-import Result
 
 class SearchImagesViewController: UIViewController,
                                   UISearchBarDelegate,
@@ -40,22 +37,43 @@ SearchItemCollectionViewController {
 
 extension SearchImagesViewController {
     
+    
+    @IBAction func onNoContentStubViewTap(_ sender: Any) {
+        searchBar.resignFirstResponder()
+    }
+    
+    @IBAction func onCollectionViewTap(_ sender: UITapGestureRecognizer) {
+        didCollectionViewTap(sender)
+    }
+    
+    
+    @IBAction func onCollectionViewDoubleTap(_ sender: UITapGestureRecognizer) {
+        didCollectionViewDoubleTap(sender)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.keywords <~ searchBar.reactive.continuousTextValues.skipNil()
-        searchButton.reactive.isHidden <~ viewModel.areKeywordsWrong.or(viewModel.isContentLoading.signal)
-        noContentStubLabel.reactive.text <~ viewModel.noContentStub
         let isNotLoadingSignal = viewModel.isContentLoading.signal.map({ value in !value})
-        noContentStubActivityIndicator.reactive.isHidden <~ isNotLoadingSignal
-        searchButton.reactive.isEnabled <~ isNotLoadingSignal
-        noContentStubView.reactive.isHidden <~ viewModel.isContentLoaded
-        collectionView.reactive.isHidden <~ viewModel.isContentLoaded.map({ value in !value  })
-        navigationItem.rightBarButtonItem?.reactive.isEnabled <~ viewModel.selectedImageItems.signal.map({items in items.count > 0})
         
-        if let search = viewModel.search {
-            searchButton.reactive.pressed = CocoaAction(search)
+        viewModel.keywords <~ searchBar.binding.text
+        
+        searchButton.binding.isHidden <~ viewModel.areKeywordsWrong
+        searchButton.binding.isHidden <~ viewModel.areKeywordsWrong.or(viewModel.isContentLoading.signal)
+        noContentStubLabel.binding.text <~ viewModel.noContentStub
+        noContentStubActivityIndicator.binding.isHidden <~ isNotLoadingSignal
+        
+        searchButton.binding.isHidden <~ isNotLoadingSignal
+        noContentStubView.binding.isHidden <~ viewModel.isContentLoaded.signal
+        collectionView.binding.isHidden <~ viewModel.isContentLoaded.signal.map({ value in !value  })
+        if let rightBarButtonItem = navigationItem.rightBarButtonItem {
+            rightBarButtonItem.binding.isEnabled <~ viewModel.selectedImageItems.signal.map({items in items.count > 0})
         }
+        if let search = viewModel.search {
+            searchButton.binding.pressed = search
+        }
+        
+        searchBar.binding.searchPressed = Action(self.searchBarSearchButtonClicked)
         
         viewModel.imageItems.signal.observe { signal in
             self.collectionView.reloadData()
@@ -90,23 +108,11 @@ extension SearchImagesViewController {
         NotificationCenter.default.removeObserver(self, name: K.Notifications.onLeftNavigationButtonClick, object: self.navigationItem)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked() {
         searchBar.resignFirstResponder()
         viewModel.loadNextPage()
     }
     
-    @IBAction func onNoContentStubViewTap(_ sender: Any) {
-        searchBar.resignFirstResponder()
-    }
-    
-    @IBAction func onCollectionViewTap(_ sender: UITapGestureRecognizer) {
-        didCollectionViewTap(sender)
-    }
-    
-    
-    @IBAction func onCollectionViewDoubleTap(_ sender: UITapGestureRecognizer) {
-        didCollectionViewDoubleTap(sender)
-    }
     
     @objc func onSaveButtonClick() {
         ContentManager.shared.save(viewModel.selectedImageItems.value)

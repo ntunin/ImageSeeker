@@ -8,7 +8,24 @@
 
 import UIKit
 
-class Mapper: NSObject {
+class Mapper<T: NSObject> {
+    
+    let pListMapper = PlistMapper()
+    
+    func map(_ json: [String: Any]) -> T? {
+        return pListMapper.map(json, to: T.self) as? T
+    }
+    
+    func map(_ jsonString: String) -> T? {
+        return pListMapper.map(jsonString, to: T.self) as? T
+    }
+}
+
+protocol Unwrapper {
+    func unwrap(_ value: Any?, configs: [String: Any?]) -> Any?
+}
+
+class PlistMapper: NSObject {
     
     private let unwrappers: [String: Unwrapper] = [
         "Int": IntUnwrapper(),
@@ -26,18 +43,6 @@ class Mapper: NSObject {
         }
     }
     
-    func json(_ jsonString: String) -> [String: Any] {
-        do {
-            if let data = jsonString.data(using: .utf8),
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                return json
-            } else {
-                return [:]
-            }
-        } catch {
-            return [:]
-        }
-    }
     
     func map(_ json: [String: Any], to missingClass: NSObject.Type) -> AnyObject? {
         let mappingClassName = NSStringFromClass(missingClass)
@@ -63,7 +68,20 @@ class Mapper: NSObject {
         return map(json, to: missingClass)
     }
     
-    func unwrap(_ value: Any?, config: [String: AnyObject]) -> Any? {
+    private func json(_ jsonString: String) -> [String: Any] {
+        do {
+            if let data = jsonString.data(using: .utf8),
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                return json
+            } else {
+                return [:]
+            }
+        } catch {
+            return [:]
+        }
+    }
+    
+    private func unwrap(_ value: Any?, config: [String: AnyObject]) -> Any? {
         guard let value =  value,
             let type = config["type"] as? String,
             let unwrapper = unwrappers[type] else {
@@ -72,7 +90,7 @@ class Mapper: NSObject {
         return unwrapper.unwrap(value, configs: config)
     }
     
-    func reach(_ keyPath: String, in json: [String: Any]) -> Any? {
+    private func reach(_ keyPath: String, in json: [String: Any]) -> Any? {
         let pathComponents = keyPath.split(separator: ".")
         var result: Any? = json
         for pathComponent in pathComponents {
@@ -127,7 +145,7 @@ class Mapper: NSObject {
                let itemTypeName = itemConfig["type"] as? String,
                let itemType = NSClassFromString(itemTypeName) as? NSObject.Type,
                let jsonItems = value as? [Any?] {
-                let mapper = Mapper()
+                let mapper = PlistMapper()
                 var result: [Any?] = []
                 for jsonItem in jsonItems {
                     if let j = jsonItem as? [String: Any] {
@@ -144,8 +162,5 @@ class Mapper: NSObject {
     }
 }
 
-protocol Unwrapper {
-    func unwrap(_ value: Any?, configs: [String: Any?]) -> Any?
-}
 
 

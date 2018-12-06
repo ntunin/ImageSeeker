@@ -41,7 +41,9 @@ extension UIImageView {
                     }
                 }
             } catch {
-                completionHandler()
+                DispatchQueue.main.async {
+                    completionHandler()
+                }
             }
         }
     }
