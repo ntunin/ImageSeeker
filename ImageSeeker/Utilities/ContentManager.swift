@@ -19,7 +19,7 @@ class ContentManager: NSObject {
 
     override init() {
         do {
-            api = try ImageSeekerJSONAPI("response")
+            api = try ImageSeekerGoogleAPI()
             if #available(iOS 10.0, *) {
                 storageManager = PersistentContainerStorageManager()
             } else {
